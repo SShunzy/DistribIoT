@@ -1,0 +1,54 @@
+[
+  {
+    "machineId" : 290,
+    "machineName": "ISIL Accueil",
+    "types": [
+      "Drinks"
+    ],
+    "position" : {
+      "latitude" : 50.6334397,
+      "longitude" : 5.5671068
+    },
+    "products" : [
+      {
+        "productId" : 8,
+        "productName" : "Coca-Cola Zéro",
+        "pictureURI" : "https://e7.pngegg.com/pngimages/11/807/png-clipart-fizzy-drinks-fanta-coca-cola-itubaina-cola-zero-cola-aluminum-can-thumbnail.png",
+        "stock" : 8,
+        "price" : 1.10
+      },{
+        "productId" : 9,
+        "productName" : "Coca-Cola",
+        "pictureURI" : "https://e7.pngegg.com/pngimages/742/816/png-clipart-coca-cola-can-illustration-coca-cola-soft-drink-surge-pepsi-coke-sweetness-cola-thumbnail.png",
+        "stock" : 7,
+        "price" : 1.10
+      }
+    ]
+  },
+  {
+    "machineId" : 291,
+    "machineName": "ISIL 4e étage",
+    "types": [
+      "Snacks"
+    ],
+    "position" : {
+      "latitude" : 50.6197829,
+      "longitude" : 5.5816319
+    },
+    "products" : [
+      {
+        "productId" : 10,
+        "productName" : "Twix",
+        "pictureURI" : "https://www.twix.com/sites/g/files/fnmzdf236/files/migrate-product-files/pm57alsea7mspqhhgfuf.png",
+        "stock" : 5,
+        "price" : 1.20
+      },{
+        "productId" : 11,
+        "productName" : "Kinder Bueno",
+        "pictureURI" : "https://png.pngtree.com/png-clipart/20240107/original/pngtree-kinder-bueno-eat-photo-png-image_14041666.png",
+        "stock" : 0,
+        "price" : 1.20
+      }
+    ]
+  }
+]
