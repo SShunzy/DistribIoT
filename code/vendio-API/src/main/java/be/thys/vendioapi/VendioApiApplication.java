@@ -3,6 +3,7 @@ package be.thys.vendioapi;
 import be.thys.vendioapi.model.MachinePOI;
 import be.thys.vendioapi.model.Position;
 import be.thys.vendioapi.model.Products;
+import be.thys.vendioapi.repository.AuthUserRepository;
 import be.thys.vendioapi.repository.MachineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,6 +21,9 @@ public class VendioApiApplication {
 
     @Autowired
     private MachineRepository machineRepository;
+
+    @Autowired
+    private AuthUserRepository userRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(VendioApiApplication.class, args);
