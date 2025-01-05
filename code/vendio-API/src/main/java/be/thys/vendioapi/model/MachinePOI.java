@@ -12,16 +12,17 @@ public class MachinePOI {
     private String machineId;
 
     private String machineName;
-
+    private List<String> types;
     private Position position;
 
     private List<Products> productsList;
 
-    public MachinePOI(String machineId, String machineName, Position position, List<Products> productsList){
+    public MachinePOI(String machineId, String machineName, Position position,List<String> types, List<Products> productsList){
         super();
         this.machineId = machineId;
         this.machineName = machineName;
         this.position = position;
+        this.types = types;
         this.productsList = productsList;
     }
     public String getMachineId(){
@@ -61,5 +62,13 @@ public class MachinePOI {
 
     public void setProductsList(List<Products> productsList) {
         this.productsList = productsList;
+    }
+
+    public List<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<String> types) {
+        this.types = types;
     }
 }

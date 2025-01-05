@@ -3,10 +3,8 @@ package be.thys.vendioapi.controllers;
 import be.thys.vendioapi.model.MachinePOI;
 import be.thys.vendioapi.model.Position;
 import be.thys.vendioapi.repository.MachineRepository;
-import org.bson.types.ObjectId;
 import org.springframework.web.bind.annotation.*;
 
-import javax.crypto.Mac;
 import java.util.List;
 
 @RestController
@@ -52,6 +50,7 @@ public class MachineListController {
         machine.setMachineId(newMachine.getMachineId());
         machine.setMachineName(newMachine.getMachineName());
         machine.setPosition(newMachine.getPosition());
+        machine.setTypes(newMachine.getTypes());
         machine.setProductsList(newMachine.getProductsList());
         return repository.save(machine);
     }
