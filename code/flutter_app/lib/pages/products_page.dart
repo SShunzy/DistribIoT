@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widget/product_list.dart';
+import 'dart:convert' show utf8;
 
 class ProductsPage extends StatelessWidget{
   const ProductsPage({super.key, required this.machineId, required this.machineName});
@@ -17,7 +18,7 @@ class ProductsPage extends StatelessWidget{
               height: 110,
               child:  CupertinoNavigationBar(
                 middle: Text(
-                  machineName,
+                    utf8.decode(machineName.codeUnits),
                   style: const TextStyle(height: 1, fontSize: 30),
                 ),
                 backgroundColor: CupertinoColors.black,
