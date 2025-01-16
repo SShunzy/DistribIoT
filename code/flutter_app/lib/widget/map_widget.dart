@@ -128,7 +128,8 @@ class _MapWidgetState extends State<MapWidget>{
                                           machineId: e.machineId,
                                           name: e.name,
                                           lat: e.lat,
-                                          long: e.long
+                                          long: e.long,
+                                          types: e.types
                                       )
                                   );
                                 }
