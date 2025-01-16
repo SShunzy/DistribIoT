@@ -43,7 +43,7 @@ class _ProductListState extends State<ProductList> {
               children:[
                 Expanded(
                   child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                       child: GridView.builder(
                           itemCount: snapshot.data!.productsList.length,
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

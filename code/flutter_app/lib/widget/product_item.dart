@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/classes/product_class.dart';
 
@@ -26,7 +28,7 @@ class ProductItem extends StatelessWidget{
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0/4),
           child: Text(
-            product.productName,
+            utf8.decode(product.productName.codeUnits),
             style: const TextStyle(color: Color(0xFFACACAC)),
           ),
         ),
