@@ -2,7 +2,9 @@ package be.thys.vendioapi.controllers;
 
 import be.thys.vendioapi.model.MachinePOI;
 import be.thys.vendioapi.model.Position;
+import be.thys.vendioapi.model.Reviews;
 import be.thys.vendioapi.repository.MachineRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +39,10 @@ public class MachineListController {
     MachinePOI getByID(@PathVariable String id){
         return repository.findMachineById(id);
     }
+    @GetMapping("/machines/{id}/reviews")
+    List<Reviews> getReviewsByID(@PathVariable String id){
+        return repository.findMachineById(id).getReviewsList();
+    }
 
     @PostMapping("/machines")
     MachinePOI newMachine(@RequestBody MachinePOI newMachine){
@@ -52,6 +58,7 @@ public class MachineListController {
         machine.setPosition(newMachine.getPosition());
         machine.setTypes(newMachine.getTypes());
         machine.setProductsList(newMachine.getProductsList());
+        machine.setReviewsList(newMachine.getReviewsList());
         return repository.save(machine);
     }
 }
