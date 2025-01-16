@@ -14,7 +14,7 @@ public interface MachineRepository extends MongoRepository<MachinePOI, String> {
 
     List<MachinePOI> findMachinePOISByPosition(Position position);
 
-    @Query("{stringId:'?0'}")
+    @Query("{machineId:'?0'}")
     MachinePOI findMachineById(String id);
     @Query("{machineName:'?0'}")
     List<MachinePOI> findMachinesByName(String machineName);
