@@ -1,6 +1,6 @@
 [
   {
-    "machineId" : 290,
+    "machineId" : "290",
     "machineName": "ISIL Accueil",
     "types": [
       "Drinks"
@@ -9,7 +9,7 @@
       "latitude" : 50.6334397,
       "longitude" : 5.5671068
     },
-    "products" : [
+    "productsList" : [
       {
         "productId" : 8,
         "productName" : "Coca-Cola Zéro",
@@ -23,19 +23,38 @@
         "stock" : 7,
         "price" : 1.10
       }
+    ],
+    "reviewsList": [
+      {
+        "reviewId": 1,
+        "userName": "John Doe",
+        "userPictureUri": "",
+        "postDate": "2025-01-16T11:24:59.323Z",
+        "rating": 4.5,
+        "commentary": "Bien placé, toujours du stock et pas cher"
+      },
+      {
+        "reviewId" : 2,
+        "userName": "Jeff Bezos",
+        "userPictureUri": "https://cdn.futura-sciences.com/sources/images/Jeff%20bezos.jpg",
+        "postDate": "2025-01-15T11:24:59.323Z",
+        "rating": 0.5,
+        "commentary": ""
+      }
     ]
   },
   {
-    "machineId" : 291,
+    "machineId" : "291",
     "machineName": "ISIL 4e étage",
     "types": [
-      "Snacks"
+      "Snacks",
+      "Drinks"
     ],
     "position" : {
       "latitude" : 50.6197829,
       "longitude" : 5.5816319
     },
-    "products" : [
+    "productsList" : [
       {
         "productId" : 10,
         "productName" : "Twix",
@@ -49,6 +68,7 @@
         "stock" : 0,
         "price" : 1.20
       }
-    ]
+    ],
+    "reviewsList": []
   }
 ]
