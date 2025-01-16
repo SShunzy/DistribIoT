@@ -15,7 +15,7 @@ class MapPage extends StatelessWidget{
             height: 110,
             child:  CupertinoNavigationBar(
               middle: Text(
-                "DistribConnect",
+                "DistribIoT",
                 style: TextStyle(height: 1, fontSize: 30),
               ),
               backgroundColor: CupertinoColors.black,
