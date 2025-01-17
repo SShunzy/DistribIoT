@@ -5,7 +5,6 @@ class VendingMachine{
   static const double size = 48;
 
   VendingMachine({
-    required this.id,
     required this.machineId,
     required this.name,
     required this.lat,
@@ -16,7 +15,6 @@ class VendingMachine{
   });
 
   final String machineId;
-  final String id;
   final String name;
   final double lat;
   final double long;
@@ -25,7 +23,6 @@ class VendingMachine{
   final List<ReviewClass> reviewsList;
 
   factory VendingMachine.fromJson(Map<String, dynamic> json) => VendingMachine(
-      id: json['id'],
       machineId: json['machineId'],
       name: json['machineName'],
       types: (json['types']as List<dynamic>).cast<String>(),

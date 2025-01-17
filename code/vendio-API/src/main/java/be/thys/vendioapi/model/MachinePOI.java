@@ -1,5 +1,6 @@
 package be.thys.vendioapi.model;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -8,7 +9,7 @@ import java.util.List;
 @Document(collection = "machines")
 public class MachinePOI {
     @MongoId
-    private String id;
+    private ObjectId id;
     private String machineId;
 
     private String machineName;
@@ -39,11 +40,11 @@ public class MachinePOI {
         return this.machineName;
     }
 
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
