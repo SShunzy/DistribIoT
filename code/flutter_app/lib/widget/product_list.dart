@@ -1,7 +1,8 @@
 import 'dart:convert';
-
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widget/product_item.dart';
+import 'package:flutter_rating/flutter_rating.dart';
 import 'package:http/http.dart' as http;
 
 import '../classes/vending_machine.dart';
@@ -37,10 +38,19 @@ class _ProductListState extends State<ProductList> {
           if(snapshot.connectionState == ConnectionState.waiting){
             return const Center(child: CircularProgressIndicator());
           }
-          else if(snapshot.hasData){
+          else if(snapshot.connectionState == ConnectionState.done && snapshot.hasData){
             return Flex(
-              direction: Axis.vertical,
-              children:[
+                direction: Axis.vertical,
+                children:[
+                  StarRating(
+                    rating: snapshot.data!.reviewsList.length > 0?
+                    snapshot.data!.reviewsList.map((review) => review.rating!).average:
+                    0.0,
+                    allowHalfRating: true,
+                    size: 40,
+                    color: Colors.amber,
+                  ),
+
                 Expanded(
                   child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -59,7 +69,6 @@ class _ProductListState extends State<ProductList> {
                   ),
                 )
               ]
-
             );
           }
           else{
