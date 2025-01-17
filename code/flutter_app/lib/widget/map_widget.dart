@@ -124,7 +124,6 @@ class _MapWidgetState extends State<MapWidget>{
                                 dataSnapshot.data!.map((e){
                                   return VendingMachineMarker(
                                       vendingMachine: VendingMachineSmall(
-                                          id:e.id,
                                           machineId: e.machineId,
                                           name: e.name,
                                           lat: e.lat,
