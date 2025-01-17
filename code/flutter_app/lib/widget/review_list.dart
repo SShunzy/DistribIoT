@@ -42,37 +42,14 @@ class _ReviewListState extends State<ReviewList> {
           else if(snapshot.hasData){
             return snapshot.data!.length > 0?
               ListView(
-              children: snapshot.data!.map((review) => ReviewItem(review: review)).toList(),
+                children: snapshot.data!.map((review) => ReviewItem(review: review)).toList(),
             ): Text("No Reviews")
             ;
-           /* return Flex(
-                direction: Axis.vertical,
-                children:[
-                  Expanded(
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: GridView.builder(
-                            itemCount: snapshot.data!.productsList.length,
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 20.0,
-                              crossAxisSpacing: 20.0,
-                              childAspectRatio: 0.75,
-                            ),
-                            itemBuilder: (context, index) => ProductItem(
-                              product: snapshot.data!.productsList[index],
-                            )
-                        )
-                    ),
-                  )
-                ]
-
-            );*/
           }
           else{
             debugPrint("Snapshot = $snapshot");
             return const Center(
-              child: Text("No data available"),
+              child: Text("Server is unavailable"),
             );
           }
         }

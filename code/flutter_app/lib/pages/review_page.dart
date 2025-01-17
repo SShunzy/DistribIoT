@@ -12,23 +12,25 @@ class ReviewPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        appBar:  PreferredSize(
-          preferredSize:  const Size(180, 110),
-          child: SizedBox(
-              height: 110,
-              child:  CupertinoNavigationBar(
-                middle: Text(
-                  utf8.decode(machineName.codeUnits),
-                  style: const TextStyle(height: 1, fontSize: 30),
-                ),
-                backgroundColor: CupertinoColors.black,
-              )
-          ),
-        ),
-        resizeToAvoidBottomInset: true,
-        body: Center(
-          child: ReviewList(machineId: machineId),
+    return  CupertinoPageScaffold(
+        child: CustomScrollView(
+          slivers: [
+            CupertinoSliverNavigationBar(
+              alwaysShowMiddle: false,
+              largeTitle:  Text(
+                utf8.decode(machineName.codeUnits),
+                style: const TextStyle(height: 1, fontSize: 30),
+              ),
+              trailing:  CupertinoButton(
+                  padding:  const EdgeInsets.symmetric(vertical: 5),
+                  child:   const Icon(Icons.account_circle),
+                  onPressed: ()=> Navigator.pop(context)
+              ),
+            ),
+             SliverFillRemaining(
+              child: ReviewList(machineId: machineId),
+            )
+          ],
         )
     );
   }
