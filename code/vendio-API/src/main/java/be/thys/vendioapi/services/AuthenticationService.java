@@ -39,6 +39,12 @@ public class AuthenticationService {
         return userRepository.save(user.get());
     }
 
+    public AuthUser getPicture(AuthUser user){
+        Optional<AuthUser> DBUser = userRepository.findByUsername(user.getUsername());
+        if(DBUser.isEmpty()) return null;
+        user.setPictureURI(DBUser.get().getPictureURI());
+        return user;
+    }
     public AuthUser authenticate(AuthUser input){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

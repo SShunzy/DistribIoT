@@ -7,6 +7,8 @@ import be.thys.vendioapi.repository.MachineRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -42,6 +44,15 @@ public class MachineListController {
     @GetMapping("/machines/{id}/reviews")
     List<Reviews> getReviewsByID(@PathVariable String id){
         return repository.findMachineById(id).getReviewsList();
+    }
+
+    @PutMapping("/machines/{id}/reviews")
+    MachinePOI postReview(@RequestBody Reviews review, @PathVariable String id){
+        review.setPostDate(Date.from(Instant.now()));
+        MachinePOI machine = repository.findMachineById(id);
+        machine.getReviewsList().add(review);
+
+        return repository.save(machine);
     }
 
     @PostMapping("/machines")

@@ -38,8 +38,10 @@ public class UserController{
         if(authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
             return ResponseEntity.status(404).build();
         String token = authorizationHeader.substring(7);
-        if(jwtService.isTokenValid(token,user.getUsername()))
-            return ResponseEntity.ok("Token: "+token);
+        if(jwtService.isTokenValid(token,user.getUsername())) {
+            user = authenticationService.getPicture(user);
+            return ResponseEntity.ok(user);
+        }
         else
             return ResponseEntity.status(401).build();
 

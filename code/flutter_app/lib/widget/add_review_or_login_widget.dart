@@ -1,28 +1,27 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/services/token_managing_service.dart';
 import 'package:flutter_app/widget/login_widget.dart';
 
 import '../classes/user_small.dart';
-import 'account_widget.dart';
+import '../services/token_managing_service.dart';
+import 'add_review_widget.dart';
 
-class AuthOrLoginWidget extends StatefulWidget{
-  const AuthOrLoginWidget({super.key});
-
-
+class AddReviewOrLoginWidget extends StatefulWidget{
+  const AddReviewOrLoginWidget({super.key, required this.machineId});
+final String machineId;
   @override
-  State<AuthOrLoginWidget> createState() => _AuthOrLoginWidgetState();
+  State<AddReviewOrLoginWidget> createState() => _AddReviewOrLoginWidgetState(machineId:machineId);
 }
 
-class _AuthOrLoginWidgetState extends State<AuthOrLoginWidget> {
-
+class _AddReviewOrLoginWidgetState extends State<AddReviewOrLoginWidget> {
   static Future<UserSmall?> _getAuthenticated() async{
     UserSmall? user = await auth();
     if(user == null) return null;
-    await storePictureURI(user.pictureURI);
     return user;
   }
+  _AddReviewOrLoginWidgetState({ required this.machineId});
 
-
+   String machineId;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -32,7 +31,10 @@ class _AuthOrLoginWidgetState extends State<AuthOrLoginWidget> {
             return const Center(child: CircularProgressIndicator());
           }
           else if(snapshot.connectionState == ConnectionState.done) {
-            return snapshot.data != null ?  AccountWidget(user:snapshot.data!) : const LoginWidget();
+            if(snapshot.hasData) return AddReviewWidget(user:snapshot.data!, machineId: machineId);
+            else {
+              return const LoginWidget();
+            }
           }
           else{
             debugPrint("Snapshot = $snapshot");
