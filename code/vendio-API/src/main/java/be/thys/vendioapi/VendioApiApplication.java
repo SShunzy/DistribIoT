@@ -11,6 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.security.authentication.AuthenticationManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +25,7 @@ public class VendioApiApplication {
 
     @Autowired
     private AuthUserRepository userRepository;
+
 
     public static void main(String[] args) {
         SpringApplication.run(VendioApiApplication.class, args);

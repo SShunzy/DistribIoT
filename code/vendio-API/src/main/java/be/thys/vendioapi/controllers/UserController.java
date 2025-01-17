@@ -1,36 +1,74 @@
 package be.thys.vendioapi.controllers;
 
 import be.thys.vendioapi.model.AuthUser;
-import be.thys.vendioapi.repository.AuthUserRepository;
-import org.apache.catalina.User;
+import be.thys.vendioapi.model.LoginResponse;
+import be.thys.vendioapi.services.AuthenticationService;
+import be.thys.vendioapi.services.JwtService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class UserController{
-    private final AuthUserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final AuthenticationService authenticationService;
 
-    public UserController(AuthUserRepository userRepository, PasswordEncoder passwordEncoder){
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+    public UserController(JwtService jwtService, AuthenticationService authenticationService){
+        this.jwtService = jwtService;
+        this.authenticationService = authenticationService;
     }
 
     @PostMapping("/register")
     public ResponseEntity registerUser(@RequestBody AuthUser user){
-        try {
-            if (userRepository.findByUsername(user.getUsername()).isPresent())
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already taken");
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            AuthUser save = userRepository.save(user);
-            return ResponseEntity.ok(HttpStatus.CREATED);
-        } catch (Exception e){
-            return ResponseEntity.internalServerError().body(e.getMessage());
-        }
+        AuthUser returnUser = authenticationService.signup(user);
+        return ResponseEntity.ok(returnUser);
     }
+
+    @PostMapping("/auth")
+    public ResponseEntity authenticateUser(
+            @RequestHeader(value = "Authorization", required = false)String authorizationHeader,
+            @RequestBody AuthUser user) {
+        if(authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
+            return ResponseEntity.status(404).build();
+        String token = authorizationHeader.substring(7);
+        if(jwtService.isTokenValid(token,user.getUsername()))
+            return ResponseEntity.ok("Token: "+token);
+        else
+            return ResponseEntity.status(401).build();
+
+    }
+
+    @PutMapping("update_picture")
+    public ResponseEntity updatePictureUser(
+            @RequestHeader(value = "Authorization", required = false)String authorizationHeader,
+            @RequestBody AuthUser input){
+        if(authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
+            return ResponseEntity.status(404).build();
+        String token = authorizationHeader.substring(7);
+        if(jwtService.isTokenValid(token,input.getUsername())){
+            AuthUser user = authenticationService.updatePicture(input.getUsername(), input.getPictureURI());
+            return ResponseEntity.ok("Picture: "+user.getPictureURI());
+        }
+        else
+            return ResponseEntity.status(401).build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity loginUser(@RequestBody AuthUser user){
+        AuthUser authenticatedUser = authenticationService.authenticate(user);
+
+        String jwtToken = jwtService.generateToken(authenticatedUser);
+
+        LoginResponse loginResponse = new LoginResponse(jwtToken,jwtService.getExpirationTime());
+
+        return ResponseEntity.ok(loginResponse);
+    }
+
 }
