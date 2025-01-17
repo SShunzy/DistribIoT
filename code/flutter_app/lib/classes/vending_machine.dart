@@ -1,4 +1,5 @@
 import 'package:flutter_app/classes/product_class.dart';
+import 'package:flutter_app/classes/review_class.dart';
 
 class VendingMachine{
   static const double size = 48;
@@ -11,6 +12,7 @@ class VendingMachine{
     required this.long,
     required this.types,
     required this.productsList,
+    required this.reviewsList
   });
 
   final String machineId;
@@ -20,6 +22,7 @@ class VendingMachine{
   final double long;
   final List<String> types;
   final List<ProductClass> productsList;
+  final List<ReviewClass> reviewsList;
 
   factory VendingMachine.fromJson(Map<String, dynamic> json) => VendingMachine(
       id: json['id'],
@@ -30,6 +33,9 @@ class VendingMachine{
       long: json['position']['longitude'],
       productsList: List<dynamic>.from(json['productsList'])
         .map((i) => ProductClass.fromJson(i))
-        .toList()
+        .toList(),
+      reviewsList : List<dynamic>.from(json['reviewsList'])
+      .map((i) => ReviewClass.fromJson(i))
+      .toList()
   );
 }
