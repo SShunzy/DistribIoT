@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/login_page.dart';
 
 import '../widget/map_widget.dart';
 
@@ -8,23 +9,30 @@ class MapPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size(180, 110),
-          child: SizedBox(
-            height: 110,
-            child:  CupertinoNavigationBar(
-              middle: Text(
+
+    return  CupertinoPageScaffold(
+        child: CustomScrollView(
+          slivers: [
+            CupertinoSliverNavigationBar(
+              alwaysShowMiddle: false,
+              largeTitle: const Text(
                 "DistribIoT",
                 style: TextStyle(height: 1, fontSize: 30),
               ),
-              backgroundColor: CupertinoColors.black,
+              trailing:  CupertinoButton(
+                padding:  const EdgeInsets.symmetric(vertical: 5),
+                child:   const Icon(Icons.account_circle),
+                onPressed: ()=> Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => const LoginPage()))
+              ),
+              ),
+            const SliverFillRemaining(
+              child: MapWidget(),
             )
-          ),
-      ),
-      resizeToAvoidBottomInset: true,
-      body: MapWidget(),
+          ],
+        )
     );
   }
-
 }
